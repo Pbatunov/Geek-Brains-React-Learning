@@ -1,9 +1,9 @@
 import React from 'react';
 import MessageList from '../MessageList/MessageList';
 
-const MessageField = ({messages}) => {
-    return messages.map(message =>{
-        return <MessageList key = {message.id} author = {message.author} text={message.text} />
+const MessageField = ({ messages }) => {
+    return messages.map(message => {
+        return <MessageList id = {message.id} author = { message.author } text={ message.text } />
     })
 };
 

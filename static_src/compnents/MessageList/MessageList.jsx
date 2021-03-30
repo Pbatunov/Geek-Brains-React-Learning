@@ -1,8 +1,8 @@
 import React from 'react';
 
-let MessageList = ({author, text}) => {
+const MessageList = ({id, author, text}) => {
     return(
-        <div>{author}: {text}</div>
+        <div key = { id }>{author}: {text}</div>
     )
 }
 
