@@ -1,0 +1,10 @@
+.messager{
+    display: flex;
+    max-width: 900px;
+    min-height: 70vh;
+    margin: 30px auto;
+
+    &__chat{
+        width: 80%;
+    }
+}

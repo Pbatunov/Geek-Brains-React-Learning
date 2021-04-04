@@ -1,29 +1,34 @@
-import React,{ useEffect, useRef, useState } from 'react';
-import MessageField from './compnents/MessageField/MessageField';
-import Form from './compnents/Form/Form';
+import React, { useEffect, useRef, useState } from 'react';
+import { author } from './components/Authors/Authors';
+import ChatList from './components/ChatList/ChatList';
+import Header from './components/Header/Header';
+import MessageField from './components/MessageField/MessageField';
+import Form from './components/Form/Form';
 import { getId } from './services/getId';
+import './styles.scss'
 
-let dataMessages = []
-
-const App = () =>{
-    const input = useRef(null);
-
+const App = () => {
+    const dataMessages = [{
+        author: author.me,
+        text: 'Привет!',
+        id: getId()
+     }, 
+     {
+        author: author.me,
+        text: 'Как дела?',
+        id: getId()
+     }];
     const [messages, setMessages] = useState(dataMessages);
-
     const [value, setValue] = useState('');
 
     useEffect(() => {
-       input.current.focus();
-    },[])
-
-    useEffect(() => {
-        if (dataMessages.length && dataMessages.length % 2 !== 0) {
-            dataMessages.push({
+        if (messages.length && messages[messages.length-1].author === author.me) {
+            messages.push({
                 id: getId(),
-                author: 'Бот',
+                author: author.bot,
                 text: 'I am bot!'
             });
-            setMessages([...dataMessages]);
+            setMessages([...messages]);
         }
     },[messages])
 
@@ -36,21 +41,25 @@ const App = () =>{
         e.preventDefault();
 
         if (value !== '') {
-            dataMessages.push({
+            messages.push({
                 id: getId(),
-                author: 'Я',
+                author: author.me,
                 text: value
-            });
+            })
 
-            setMessages([...dataMessages]);
+            setMessages([...messages]);
             setValue('');
         }
     }
 
     return (
-        <div>
-            <MessageField messages = { messages } />
-            <Form input = { input } value = { value } inputHandler = { inputHandler } submitHandler = { submitHandler } />
+        <div className="messager">
+            <ChatList />
+            <div className="messager__chat">
+                <Header />
+                <MessageField messages = { messages } />
+                <Form value = { value } inputHandler = { inputHandler } submitHandler = { submitHandler } />
+            </div>
         </div>
     )
 }
