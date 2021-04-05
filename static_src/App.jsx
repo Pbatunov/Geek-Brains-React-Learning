@@ -8,6 +8,7 @@ import { getId } from './services/getId';
 import './styles.scss'
 
 const App = () => {
+
     const dataMessages = [{
         author: author.me,
         text: 'Привет!',
@@ -49,6 +50,7 @@ const App = () => {
 
             setMessages([...messages]);
             setValue('');
+
         }
     }
 
