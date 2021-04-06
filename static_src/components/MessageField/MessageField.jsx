@@ -1,10 +1,14 @@
 import React from 'react';
 import MessageList from '../MessageList/MessageList';
+import './styles.scss'
+
 
 const MessageField = ({ messages }) => {
-    return messages.map(message => {
-        return <MessageList id = {message.id} author = { message.author } text={ message.text } />
-    })
+    return (
+        <div className="message__field">
+            <MessageList messages={ messages } />
+        </div>
+    )
 };
 
 export default MessageField
