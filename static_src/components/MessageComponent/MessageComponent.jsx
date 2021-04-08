@@ -1,12 +1,11 @@
 import React from 'react';
 import './styles.scss'
-import  { author as authors } from '../Authors/Authors'
+import  { author as authors } from '../../services/Authors';
+import { classNames } from '../../services/ClassNames';
 
 const MessageComponent = ({ id, author, text }) =>{
-    let classString = 'message__wrapper';
-    if (author === authors.me) classString += ' right'
     return(
-        <div key = { id } className={ classString }>
+        <div key = { id } className={ author === authors.me ? classNames.right : classNames.normal }>
             <div className="message__text">{ text }</div>
             <div className="message__author">{ author }</div> 
         </div>
