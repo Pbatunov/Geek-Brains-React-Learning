@@ -1,0 +1,12 @@
+.message{
+    &__field{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(240, 240, 230);
+        padding: 15px 20px;
+        box-sizing: border-box;
+        overflow-y: scroll;
+    }
+}
