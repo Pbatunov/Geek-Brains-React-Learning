@@ -7,7 +7,7 @@ const Router = () => {
     return (
         <Switch>
             <Route exact path='/'>
-                <App chatId='1'/>
+                <Redirect to='/chat/1/' />
             </Route>
             <Route path='/profile'>
                 <Profile />
@@ -18,7 +18,7 @@ const Router = () => {
                 render={obj => <App chatId={Number(obj.match.params.chatId)} />
                 }
             />
-            <Redirect to='/' />
+            <Redirect to='/chat/1/' />
         </Switch>
     );
 }

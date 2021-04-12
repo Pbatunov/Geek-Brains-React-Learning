@@ -1,113 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { author } from '../../services/Authors';
-import AddChatButton from '../AddChatButton/AddChatButton';
+import { addChat } from '../../store/chatList/actions';
 import ChatList from '../ChatList/ChatList';
 import Header from '../Header/Header';
 import MessageField from '../MessageField/MessageField';
-import Form from '../Form/Form';
-import { getId } from '../../services/getId';
+import { Button } from '@material-ui/core';
 import './styles.scss';
 
 const App = ({ chatId }) => {
-
-    const initChats = {
-        1: [{
-            id: getId(),
-            author: author.me,
-            text: 'Привет!'
-         }, 
-         {
-            id: getId(),
-            author: author.me,
-            text: 'Как дела?'
-         }],
-         2: [{
-            id: getId(),
-            author: author.me,
-            text: 'Hello!'
-         }, 
-         {
-            id: getId(),
-            author: author.me,
-            text: 'How are you?'
-         }],
-         3: [{
-            id: getId(),
-            author: author.me,
-            text: 'Hi!'
-         },
-         {
-            id: getId(),
-            author: author.bot,
-            text: 'What are you doing man?',
-         }]
-    }
-    const [chats, setChats] = useState(initChats);
-    const [value, setValue] = useState('');
-    useEffect(() => {
-        const lastMessage = chats[chatId][chats[chatId].length-1]
-        if (chats[chatId].length > 0 && lastMessage.author === author.me) {
-            setChats({
-                ...chats,
-                [chatId]: [
-                    ...chats[chatId],
-                    {
-                        id: getId(),
-                        author: author.bot,
-                        text: 'I am bot!'
-                    }
-                ]
-            });
-        }
-    },[chats])
-
+    const dispatch = useDispatch();
     const addChatHandler = () => {
-        const chatsIds = Object.keys(chats);
-        const lastChatId = parseInt(chatsIds[chatsIds.length - 1]);
-        let addedChatId = lastChatId + 1
-        console.log(addedChatId);
-        setChats({
-            ...chats,
-            [addedChatId]: []
-        });
-
-    }
-
-    const inputHandler = (e) => {
-        setValue(e.target.value);
-    }
-    
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        if (value !== '') {
-            setChats({
-                ...chats,
-                [chatId]: [
-                    ...chats[chatId],
-                    {
-                        id: getId(),
-                        author: author.me,
-                        text: value
-                    }
-                ]
-            });
-            setValue('');
-        }
+        dispatch(addChat())
     }
 
     return (
         <div className="messager">
             <div className="messager__sidebar">
-                <Link to="/profile/"><div>Профиль</div></Link>
-                <AddChatButton addChatHandler = { addChatHandler } />
-                <ChatList chats = { chats } />
+                <Link to="/profile/">
+                    <Button variant="contained" color="secondary" style={{marginBottom: '10px', textDecoration: 'none'}}> В профиль</Button>
+                </Link>
+                <Button onClick = { addChatHandler } variant="contained" color="primary">Добавить чат</Button>
+                <ChatList />
             </div>
             <div className="messager__chat">
                 <Header />
-                <MessageField messages = { chats[chatId] } />
-                <Form value = { value } inputHandler = { inputHandler } submitHandler = { submitHandler } />
+                <MessageField chatId = { chatId } />
             </div>
         </div>
     )
