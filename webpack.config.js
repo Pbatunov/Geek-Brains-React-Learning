@@ -23,6 +23,7 @@ mode: 'development',
 
         })
     ],
+   devtool: 'source-map', 
    module: {    
         rules: [{
             test: /\.(scss|css)$/,
