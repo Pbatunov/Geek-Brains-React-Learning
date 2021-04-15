@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 .messager{
     display: flex;
     max-width: 900px;
@@ -8,5 +12,9 @@
         width: 80%;
         display: flex;
         flex-direction: column;
+    }
+
+    &__sidebar{
+        width: 20%;
     }
 }

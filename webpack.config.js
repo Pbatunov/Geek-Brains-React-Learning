@@ -11,7 +11,11 @@ mode: 'development',
    output: {
        path: path.resolve(__dirname, "static","build"),
        filename: 'app.js',
+       publicPath: '/'
    },
+    devServer: {
+        historyApiFallback: true
+    },
    plugins: [
        new MiniCssExtractPlugin({
            filename: 'styles.css',

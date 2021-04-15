@@ -1,9 +1,17 @@
 .chat__header{
     text-align: center;
-    font-size: 20px;
-    line-height: 24px;
     font-family: sans-serif;
-    color: green;
-    font-weight: bold;
     background: #ddd;
+
+    &__status{
+        font-size: 20px;
+        line-height: 24px;
+        color: green;
+        font-weight: bold;
+    }
+
+    &__name{
+        font-size: 24px;
+        line-height: 28px;
+    }
 }
