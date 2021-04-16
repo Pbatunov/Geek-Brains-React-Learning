@@ -1,5 +1,5 @@
 import React from 'react';
-\import { TextField, Fab } from '@material-ui/core/';
+import { TextField, Fab } from '@material-ui/core/';
 import SendIcon from '@material-ui/icons/Send'
 import './styles.scss'
 

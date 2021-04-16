@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MessageList from '../MessageList/MessageList';
 import Form from '../Form/Form';
 import { addMessage } from '../../store/messages/actions';
+import { addBotMessage } from '../../store/messages/actions';
 import { author } from '../../services/Authors';
 import './styles.scss'
 
@@ -13,11 +14,9 @@ const MessageField = ({ chatId }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const lastMessage = messages[chatId][messages[chatId].length-1]
-        if (messages[chatId].length > 0 && lastMessage.author === author.me) {
-            dispatch(addMessage("I'll be back!", author.bot, chatId));
-        }
-    },[messages, addMessage])
+        dispatch(addBotMessage(chatId));
+    },[messages])
+
 
     const inputHandler = (e) => {
         setValue(e.target.value);
